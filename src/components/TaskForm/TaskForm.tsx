@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { matchPath, useLocation } from 'react-router-dom';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import style from './TaskForm.module.scss';
 import { Priority, TaskFormValues, Status } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -40,6 +40,14 @@ function TaskForm({ onSubmit, onCancel, values }: TaskFormProps) {
   const location = useLocation();
   const fromBoardPage = matchPath('/boards/:id', location.pathname);
   const boardId = fromBoardPage ? fromBoardPage?.params.id : values?.boardId;
+
+  const fromTasksPage = matchPath('/tasks', location.pathname);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/boards/${values?.boardId}`);
+  };
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -143,12 +151,19 @@ function TaskForm({ onSubmit, onCancel, values }: TaskFormProps) {
           </select>
         </label>
         <div className={style.formBtns}>
-          <button type="submit" className="button">
-            {values ? 'Обновить' : 'Создать'}
-          </button>
-          <button type="button" className="button" onClick={onCancel}>
-            Отмена
-          </button>
+          {fromTasksPage && values && (
+            <button type="button" className="button" onClick={handleClick}>
+              Перейти к доске
+            </button>
+          )}
+          <div className={style.formBtns}>
+            <button type="submit" className="button">
+              {values ? 'Обновить' : 'Создать'}
+            </button>
+            <button type="button" className="button" onClick={onCancel}>
+              Отмена
+            </button>
+          </div>
         </div>
       </form>
     </>
