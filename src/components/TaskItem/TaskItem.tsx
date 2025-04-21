@@ -3,7 +3,7 @@ import { SubmitHandler } from 'react-hook-form';
 import style from './TaskItem.module.scss';
 import { Task, TaskFormValues, TaskUpdate } from '../../types';
 import { useAppDispatch } from '../../redux/hooks';
-import { updateTaskById } from '../../redux/thunks';
+import { updateStatus, updateTaskById } from '../../redux/thunks';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
 
@@ -25,7 +25,7 @@ function TaskItem({ task }: TaskItemProps) {
 
   const handleSubmit: SubmitHandler<TaskFormValues> = async (data) => {
     const updatedValues = {
-      assigneeId: assignee.id,
+      assigneeId: Number(data.assigneeId),
       description: data.description,
       priority: data.priority,
       status: data.status,
@@ -33,7 +33,7 @@ function TaskItem({ task }: TaskItemProps) {
     } as TaskUpdate;
 
     await dispatch(updateTaskById({ taskId: id, task: updatedValues }));
-    // await dispatch(fetchTasks());
+    // await dispatch(updateStatus({taskId: id, }));
     setIsEdit(false);
   };
 
@@ -52,7 +52,7 @@ function TaskItem({ task }: TaskItemProps) {
               boardId,
               priority,
               status,
-              assignee,
+              assigneeId: assignee.id,
             }}
           />
         </Modal>

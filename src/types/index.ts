@@ -50,9 +50,9 @@ export type UpdateStatus = {
 };
 
 export const Priority = {
-  High: 'High',
-  Medium: 'Medium',
   Low: 'Low',
+  Medium: 'Medium',
+  High: 'High',
 } as const;
 
 export const Status = {
@@ -69,4 +69,13 @@ export type Config = {
   body?: string;
 };
 
-export type TaskFormValues = Partial<Task>;
+// export type TaskFormValues = Partial<Task>;
+export type TaskFormValues = {
+  id?: number;
+  description: string;
+  title: string;
+  priority: (typeof Priority)[keyof typeof Priority];
+  status?: (typeof Status)[keyof typeof Status];
+  boardId?: number;
+  assigneeId: number;
+};
