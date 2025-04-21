@@ -10,7 +10,6 @@ import {
 } from '../api/api';
 import { TaskCreate, TaskUpdate, UpdateStatus } from '../types';
 import { editTask } from './tasksSlice';
-import { editBoardTask } from './boardSlice';
 
 export const fetchBoards = createAsyncThunk(
   'boards/fetchBoards',
@@ -55,7 +54,6 @@ export const updateTaskById = createAsyncThunk(
       const { taskId, task } = data;
       const response = await updateTask(taskId, task);
       dispatch(editTask({ taskId, task }));
-      //dispatch(editBoardTask({ taskId, task }));
       return response;
     } catch (err) {
       return rejectWithValue((err as Error).message);
@@ -63,26 +61,11 @@ export const updateTaskById = createAsyncThunk(
   }
 );
 
-// export const updateBoardTask = createAsyncThunk(
-//   'board/updateBoardTask',
-//   async (data: { taskId: number; task: TaskUpdate }, { rejectWithValue, dispatch }) => {
-//     try {
-//       const { taskId, task } = data;
-//       const response = await updateTask(taskId, task);
-//       dispatch(editBoardTask({ taskId, task }));
-//       return response;
-//     } catch (err) {
-//       return rejectWithValue((err as Error).message);
-//     }
-//   }
-// );
-
 export const addTask = createAsyncThunk(
   'tasks/addTask',
-  async (task: TaskCreate, { rejectWithValue, dispatch }) => {
+  async (task: TaskCreate, { rejectWithValue }) => {
     try {
       const response = await createTask(task);
-      // dispatch(editTask({ taskId, task }));
       return response;
     } catch (err) {
       return rejectWithValue((err as Error).message);

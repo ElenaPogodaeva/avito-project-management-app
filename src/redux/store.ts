@@ -1,16 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import boardsReducer from './boardsSlice';
-import boardReducer from './boardSlice';
 import tasksReducer from './tasksSlice';
 import usersReducer from './usersSlice';
-// import { usersApi } from '../api/users';
-// import { boardsApi } from '../api/boards';
 
 export const store = configureStore({
   reducer: {
     boards: boardsReducer,
-    //board: boardReducer,
     users: usersReducer,
     tasks: tasksReducer,
     // [boardsApi.reducerPath]: boardsApi.reducer,

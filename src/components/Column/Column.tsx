@@ -8,7 +8,6 @@ export type ColumnProps = {
 };
 
 function Column({ title, tasks }: ColumnProps) {
-
   return (
     <div className={style.column}>
       <h3 className={style.columnTitle}>{title}</h3>

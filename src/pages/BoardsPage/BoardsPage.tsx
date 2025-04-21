@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import BoardList from '../../components/BoardList/BoardList';
-// import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-// import { fetchBoards } from '../../redux/thunks';
-import { useGetBoardsQuery } from '../../api/boards';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchBoards } from '../../redux/thunks';
+import { Loader } from '../../components/Loader/Loader';
 
 function BoardsPage() {
   const { boards, isLoading, error } = useAppSelector((state) => state.boards);
@@ -17,7 +15,7 @@ function BoardsPage() {
 
   return (
     <div className="page">
-      {isLoading ? <div>Loading</div> : <BoardList boards={boards} />}
+      {isLoading ? <Loader /> : <BoardList boards={boards} />}
       {error && <div>Error occured</div>}
     </div>
   );

@@ -4,9 +4,8 @@ import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import style from './TaskForm.module.scss';
 import { Priority, TaskFormValues, Status } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { useGetBoardsQuery } from '../../api/boards';
-import { useGetUsersQuery } from '../../api/users';
 import { fetchBoards, fetchUsers } from '../../redux/thunks';
+import { Loader } from '../Loader/Loader';
 
 type TaskFormProps = {
   onSubmit: (data: TaskFormValues) => void;
@@ -54,15 +53,7 @@ function TaskForm({ onSubmit, onCancel, values }: TaskFormProps) {
     dispatch(fetchBoards());
   }, []);
 
-  // const { data: boardsData, isLoading: isBoardsLoading, error: boardsError } = useGetBoardsQuery();
-
-  // const boards = boardsData?.data ?? [];
-
-  // const { data: usersData, isLoading: isUsersLoading, error: usersError } = useGetUsersQuery();
-
-  // const users = usersData?.data ?? [];
-
-  if (isBoardsLoading || isUsersLoading) return <div className="">Loading</div>;
+  if (isBoardsLoading || isUsersLoading) return <Loader /> ;
   if (boardsError || usersError) {
     return <p>An error has occurred</p>;
   }

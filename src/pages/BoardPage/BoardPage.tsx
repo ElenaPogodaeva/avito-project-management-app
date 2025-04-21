@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchBoard } from '../../redux/thunks';
 import { Status } from '../../types';
 import Column from '../../components/Column/Column';
+import { Loader } from '../../components/Loader/Loader';
 
 function BoardPage() {
   const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
@@ -23,7 +24,7 @@ function BoardPage() {
     dispatch(fetchBoard(boardId));
   }, []);
 
-  if (isLoading) return <div className="">Loading</div>;
+  if (isLoading) return <Loader /> ;
   if (error) return <div className="">Error occured</div>;
 
   return (
