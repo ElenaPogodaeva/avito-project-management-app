@@ -64,3 +64,8 @@ export const updateTaskStatus = (taskId: number, body: UpdateStatus) => {
   const url = `${BASE_URL}/tasks/updateStatus/${taskId}`;
   return createResponse(url, 'PUT', body);
 };
+
+export const getUsers = () => {
+  const url = `${BASE_URL}/users`;
+  return createResponse(url, 'GET');
+};
