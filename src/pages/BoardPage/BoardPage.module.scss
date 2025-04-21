@@ -1,0 +1,17 @@
+.boardTitle {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.columnList {
+  background: #dfe3e6;
+  height: 72vh;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: scroll;
+  box-shadow: 3px 3px 3px rgba(9, 45, 66, 0.25);
+  border-radius: 5px;
+  padding: 10px;
+}

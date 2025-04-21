@@ -86,3 +86,62 @@ body {
   text-align: center;
   margin-bottom: 10px;
 }
+
+
+.column-list {
+  height: 72vh;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: scroll;
+  //background: linear-gradient(70deg, $main-light-blue, $main-light-pink);
+  box-shadow: 3px 3px 3px rgba(9, 45, 66, 0.25);
+  border-radius: 25px;
+  padding: 25px;
+
+  @media (max-width: 1024px) {
+    height: 65vh;
+    width: 920px;
+    margin: 0 50px;
+  }
+
+  .add-column-btn {
+    min-width: 260px;
+    display: block;
+    //font-size: $descr-font;
+    //background: $main-light-blue;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+
+    @media (max-width: 1024px) {
+      min-width: 200px;
+    }
+
+    &:hover {
+      // font-weight: bold;
+      // color: $main-light-orange;
+      // background: $main-blue;
+    }
+  }
+}
+.column-list-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: visible;
+}
+.column-list::-webkit-scrollbar {
+  height: 20px;
+}
+.column-list::-webkit-scrollbar-thumb {
+  background-color: #e8ecf8;
+  border-top: 0.5rem solid #fff;
+}
+
+.page {
+  padding: 20px 0;
+}
