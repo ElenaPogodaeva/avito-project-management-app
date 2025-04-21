@@ -1,0 +1,31 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 18px;
+  color: #000;
+  text-align: left;
+  padding: 10px;
+  margin-bottom: 28px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .12);
+  border: 1px solid rgb(209, 217, 224);
+  transition: .3s;
+  background: #fff;
+
+  font-size: 18px;
+  line-height: 24px;
+  overflow-wrap: break-word;
+  min-height: 18px;
+}
+
+
+.itemTitle {
+  font-size: 20px;
+  font-weight: 600;
+  //color: #0969da;
+  // &:hover {
+  //   text-decoration: underline;
+  // }
+}
+

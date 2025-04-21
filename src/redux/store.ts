@@ -11,10 +11,13 @@ export const store = configureStore({
   reducer: {
     boards: boardsReducer,
     board: boardReducer,
+    users: usersReducer,
+    tasks: tasksReducer,
+    // [boardsApi.reducerPath]: boardsApi.reducer,
+    // [usersApi.reducerPath]: usersApi.reducer,
   },
 
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(usersApi.middleware),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersApi.middleware),
 });
 
 setupListeners(store.dispatch);
