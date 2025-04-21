@@ -3,7 +3,7 @@ import { SubmitHandler } from 'react-hook-form';
 import style from './TaskItem.module.scss';
 import { Task, TaskFormValues, TaskUpdate } from '../../types';
 import { useAppDispatch } from '../../redux/hooks';
-import { updateStatus, updateTaskById } from '../../redux/thunks';
+import { updateTaskById } from '../../redux/thunks';
 import Modal from '../Modal/Modal';
 import TaskForm from '../TaskForm/TaskForm';
 
@@ -33,7 +33,6 @@ function TaskItem({ task }: TaskItemProps) {
     } as TaskUpdate;
 
     await dispatch(updateTaskById({ taskId: id, task: updatedValues }));
-    // await dispatch(updateStatus({taskId: id, }));
     setIsEdit(false);
   };
 
