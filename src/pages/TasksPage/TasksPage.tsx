@@ -32,7 +32,6 @@ function TasksPage() {
 
     console.log(data);
     await dispatch(addTask(newValues));
-    await dispatch(fetchTasks());
     setIsEdit(false);
   };
 

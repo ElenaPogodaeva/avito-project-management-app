@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchTasks } from './thunks';
+import { addTask, fetchBoard, fetchTasks, updateStatus } from './thunks';
 import { Task, TaskUpdate } from '../types';
 
 export type TasksState = {
@@ -21,7 +21,6 @@ export const tasksSlice = createSlice({
     editTask(state, action: PayloadAction<{ taskId: number; task: TaskUpdate }>) {
       const { taskId, task } = action.payload;
       const currentTask = state.tasks.find((item) => item.id === taskId) as Task;
-
       currentTask.assignee.id = task.assigneeId;
       currentTask.title = task.title;
       currentTask.description = task.description;
@@ -40,6 +39,20 @@ export const tasksSlice = createSlice({
       state.tasks = action.payload;
     });
     builder.addCase(fetchTasks.rejected, (state) => {
+      state.isLoading = false;
+      state.error = 'Error occured';
+      state.tasks = [];
+    });
+    builder.addCase(fetchBoard.pending, (state) => {
+      state.isLoading = true;
+      state.error = '';
+    });
+    builder.addCase(fetchBoard.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = '';
+      state.tasks = action.payload;
+    });
+    builder.addCase(fetchBoard.rejected, (state) => {
       state.isLoading = false;
       state.error = 'Error occured';
       state.tasks = [];

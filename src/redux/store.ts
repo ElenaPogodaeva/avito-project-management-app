@@ -10,7 +10,7 @@ import usersReducer from './usersSlice';
 export const store = configureStore({
   reducer: {
     boards: boardsReducer,
-    board: boardReducer,
+    //board: boardReducer,
     users: usersReducer,
     tasks: tasksReducer,
     // [boardsApi.reducerPath]: boardsApi.reducer,
