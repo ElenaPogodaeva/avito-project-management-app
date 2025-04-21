@@ -1,28 +1,25 @@
-import { useEffect, useState } from 'react';
-import { getBoards } from '../../api/api';
+import { useEffect } from 'react';
 import BoardList from '../../components/BoardList/BoardList';
+// import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+// import { fetchBoards } from '../../redux/thunks';
+import { useGetBoardsQuery } from '../../api/boards';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchBoards } from '../../redux/thunks';
 
 function BoardsPage() {
-  const [boards, setBoards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { boards, isLoading, error } = useAppSelector((state) => state.boards);
 
-  const fetchBoards = async () => {
-    setIsLoading(true);
-    try {
-      const boards = await getBoards();
-      setBoards(boards.data);
-    } catch (err) {
-      setBoards([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetchBoards();
+    dispatch(fetchBoards());
   }, []);
 
-  return <BoardList boards={boards} />;
+  return (
+    <div className="page">
+      {isLoading ? <div>Loading</div> : <BoardList boards={boards} />}
+      {error && <div>Error occured</div>}
+    </div>
+  );
 }
-
 export default BoardsPage;
