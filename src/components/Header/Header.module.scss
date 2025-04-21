@@ -18,7 +18,7 @@
 .menuLink {
   display: block;
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.7);
+  color: white;
   text-decoration: none;
   padding: 20px 10px;
   transition: .3s;
@@ -28,6 +28,7 @@
 .menuLink:hover {
   background-color: #1E88E5;
 }
-a.active {
-  color: #fff;
+
+.menuLink.active {
+  color: rgba(255, 255, 255, 0.7);
 }
