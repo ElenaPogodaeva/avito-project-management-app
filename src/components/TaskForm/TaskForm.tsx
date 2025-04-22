@@ -53,7 +53,7 @@ function TaskForm({ onSubmit, onCancel, values }: TaskFormProps) {
     dispatch(fetchBoards());
   }, []);
 
-  if (isBoardsLoading || isUsersLoading) return <Loader /> ;
+  if (isBoardsLoading || isUsersLoading) return <Loader />;
   if (boardsError || usersError) {
     return <p>An error has occurred</p>;
   }

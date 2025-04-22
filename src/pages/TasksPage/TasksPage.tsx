@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import { getTasks } from '../../api/api';
 import TaskList from '../../components/TaskList/TaskList';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addTask, fetchTasks } from '../../redux/thunks';
@@ -8,6 +7,8 @@ import style from './TasksPage.module.scss';
 import { TaskCreate, TaskFormValues } from '../../types';
 import Modal from '../../components/Modal/Modal';
 import TaskForm from '../../components/TaskForm/TaskForm';
+import Search from '../../components/Search/Search';
+import { Loader } from '../../components/Loader/Loader';
 
 function TasksPage() {
   const { tasks, isLoading, error } = useAppSelector((state) => state.tasks);
@@ -30,7 +31,6 @@ function TasksPage() {
       title: data.title,
     } as TaskCreate;
 
-    console.log(data);
     await dispatch(addTask(newValues));
     setIsEdit(false);
   };
@@ -39,8 +39,12 @@ function TasksPage() {
     dispatch(fetchTasks());
   }, []);
 
+  if (isLoading) return <Loader />;
+  if (error) return <div className="message">Error occured</div>;
+
   return (
     <div className="page">
+      <Search />
       <TaskList tasks={tasks} />
       <button type="button" className={`button ${style.itemBtn}`} onClick={() => setIsEdit(true)}>
         Создать задачу

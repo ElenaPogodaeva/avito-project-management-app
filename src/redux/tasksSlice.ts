@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { addTask, fetchBoard, fetchTasks, updateStatus } from './thunks';
+import { fetchBoard, fetchTasks } from './thunks';
 import { Task, TaskUpdate } from '../types';
 
 export type TasksState = {
   tasks: Task[];
+  searchValue: string;
   isLoading: boolean;
   error: string;
 };
 
 const initialState: TasksState = {
   tasks: [],
+  searchValue: '',
   isLoading: true,
   error: '',
 };
@@ -26,6 +28,11 @@ export const tasksSlice = createSlice({
       currentTask.description = task.description;
       currentTask.priority = task.priority;
       currentTask.status = task.status;
+    },
+    searchByName: (state, action: PayloadAction<string>) => {
+      state.tasks = state.tasks.filter((task) =>
+        task.title.toLowerCase().includes(action.payload.toLowerCase())
+      );
     },
   },
   extraReducers: (builder) => {
@@ -60,6 +67,6 @@ export const tasksSlice = createSlice({
   },
 });
 
-export const { editTask } = tasksSlice.actions;
+export const { editTask, searchByName } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

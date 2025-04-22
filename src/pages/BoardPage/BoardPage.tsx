@@ -24,7 +24,7 @@ function BoardPage() {
     dispatch(fetchBoard(boardId));
   }, []);
 
-  if (isLoading) return <Loader /> ;
+  if (isLoading) return <Loader />;
   if (error) return <div className="">Error occured</div>;
 
   return (
@@ -32,7 +32,11 @@ function BoardPage() {
       <h2 className={style.boardTitle}>Задачи проекта</h2>
       <section className={style.columnList}>
         {columns.map((item) => (
-          <Column title={item.title} tasks={tasks.filter((task) => task.status === item.status)} />
+          <Column
+            key={item.title}
+            title={item.title}
+            tasks={tasks.filter((task) => task.status === item.status)}
+          />
         ))}
       </section>
     </>
